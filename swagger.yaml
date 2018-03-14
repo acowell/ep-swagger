@@ -612,6 +612,10 @@ definitions:
         $ref: "#/definitions/Amount"
       sellCurrency:
         type: string
+      fxRate:
+        $ref: "#/definitions/FXRate"
+      fxTicketId:
+        type: integer
   Amount:
     type: object
     properties:
@@ -619,7 +623,15 @@ definitions:
         type: string
       amount: 
         type: string 
-      
+  FXRate:
+    type: object
+    properties:
+      sellCurrency:
+        type: string
+      buyCurrency:
+        type: string
+      rate:
+        type: number
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
 basePath: /Earthport/Payments-API/1.0.0
