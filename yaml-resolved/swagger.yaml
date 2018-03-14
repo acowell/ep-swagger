@@ -431,6 +431,29 @@ paths:
           description: "The Balance for given currency does not exist."
         500:
           description: "An internal error has occurred in the Earthport payment platform."
+  /quotes:
+    post:
+      tags:
+      - "FX Quote"
+      summary: "Creates an FX Quote."
+      description: "Creates a new FX Quote. This quote will have a time to live. You\
+        \ can use the quote's ticket id in subsequent payment requests."
+      parameters:
+      - in: "body"
+        name: "quote"
+        description: "The quote to create."
+        required: false
+        schema:
+          $ref: "#/definitions/Quote"
+      responses:
+        204:
+          description: "Payment succesfully created."
+        400:
+          description: "Payment couldn't be created. Input Request is invalid or incorrect."
+        401:
+          description: "Unauthorised - Invalid API Key and Token."
+        500:
+          description: "An internal error has occurred in the Earthport payment platform."
 definitions:
   Payer:
     type: "object"
