@@ -780,7 +780,16 @@ definitions:
         $ref: "#/definitions/Amount"
       sellCurrency:
         type: "string"
+      fxRate:
+        $ref: "#/definitions/FXRate"
+      fxTicketId:
+        type: "integer"
     example:
+      fxRate:
+        rate: 0.80082819046101150206595775671303272247314453125
+        sellCurrency: "sellCurrency"
+        buyCurrency: "buyCurrency"
+      fxTicketId: 6
       buyAmount:
         amount: "amount"
         currency: "currency"
@@ -799,3 +808,16 @@ definitions:
     example:
       amount: "amount"
       currency: "currency"
+  FXRate:
+    type: "object"
+    properties:
+      sellCurrency:
+        type: "string"
+      buyCurrency:
+        type: "string"
+      rate:
+        type: "number"
+    example:
+      rate: 0.80082819046101150206595775671303272247314453125
+      sellCurrency: "sellCurrency"
+      buyCurrency: "buyCurrency"
