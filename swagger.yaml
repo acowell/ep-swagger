@@ -403,7 +403,31 @@ paths:
         401:
           description: Unauthorised - Invalid API Key and Token.
         500:
-          description: An internal error has occurred in the Earthport payment platform.       
+          description: An internal error has occurred in the Earthport payment platform.
+  /bulkQuotes:
+    post:
+      summary: Creates a Bulk FX Quote.
+      tags:
+        - FX Quote
+      description: d
+      parameters:
+        - in: body 
+          name: bulkQuotes
+          description: The quote to create.
+          type: array
+          items:
+              $ref: "#/definitions/BulkQuoteRequest"
+      responses:
+        204:
+          description: Bulk Quote succesfully created.
+          examples:
+            application/json: { "fxTicketId": 68633, "fxRate": {"sellCurrency": "EUR", "buyCurrency":"GBP", "rate":0.818579}, "sellAmount": {"currency":"EUR", "amount":"244.33"}, "buyAmount": {"currency":"GBP", "amount":"200.00"}  }
+        400:
+          description: Bulk Quote couldn't be created. Input Request is invalid or incorrect.
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        500:
+          description: An internal error has occurred in the Earthport payment platform.
 definitions:
   Payer:
     type: object
@@ -673,6 +697,17 @@ definitions:
         type: string
       rate:
         type: number
+  BulkQuoteRequest:
+    type: object
+    properties:
+      buyCountry:
+        type: string
+      buyCurrency:
+        type: string
+      sellCurrency:
+        type: string
+      serviceLevel:
+        type: string
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
 basePath: /Earthport/Payments-API/1.0.0
