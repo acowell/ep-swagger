@@ -454,9 +454,9 @@ paths:
           $ref: "#/definitions/Quote"
       responses:
         204:
-          description: "Payment succesfully created."
+          description: "Quote succesfully created."
         400:
-          description: "Payment couldn't be created. Input Request is invalid or incorrect."
+          description: "Quote couldn't be created. Input Request is invalid or incorrect."
         401:
           description: "Unauthorised - Invalid API Key and Token."
         500:
