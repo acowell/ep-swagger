@@ -373,6 +373,38 @@ paths:
           description: Unauthorised - Invalid API Key and Token.
         500:
           description: An internal error has occurred in the Earthport payment platform. 
+      get:
+        summary: Gets an Indicative FX Quote 
+        tags:
+          - FX Quote
+        description: blah blah
+        parameters:
+          - in: query
+            name: buyCurrency
+            description:
+            type: string
+          - in: query
+            name: sellCurrency
+            description:
+            type: string          
+          - in: query
+            name: buyAmount
+            description:
+            type: string  
+          - in: query
+            name: sellAmount
+            description:
+            type: string  
+        responses:
+          200:
+            description: Quote succesfully returned.
+          400:
+            description: Quote couldn't be created. Input Request is invalid or incorrect.
+          401:
+            description: Unauthorised - Invalid API Key and Token.
+          500:
+            description: An internal error has occurred in the Earthport payment platform.       
+          
 definitions:
   Payer:
     type: object
