@@ -601,6 +601,25 @@ definitions:
       timeStamp:
         type: integer
         description: hhh
+  Quote:
+    type: object
+    properties:
+      sellAmount: 
+        $ref: "#/definitions/Amount"
+      buyCurrency: 
+        type: string  
+      buyAmount:
+        $ref: "#/definitions/Amount"
+      sellCurrency:
+        type: string
+  Amount:
+    type: object
+    properties:
+      currency: 
+        type: string
+      amount: 
+        type: string 
+      
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
 basePath: /Earthport/Payments-API/1.0.0
