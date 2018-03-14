@@ -709,6 +709,35 @@ definitions:
         type: string
       serviceLevel:
         type: string
+        enum: [standard, express]
+  BulkQuoteResponse:
+    type: object
+    properties:
+      fxTicketID:
+        type: integer
+      expiryTimestamp:
+        type: integer
+      bulkFXDetails:
+        type: array
+        items: 
+          $ref: '#/definitions/BulkFXDetail'
+  BulkFXDetail:
+    type: object
+    properties:
+      sellCurrency:
+        type: string
+      buyCountry:
+        type: string
+      buyCurrency:
+        type: string
+      serviceLevel:
+        type: string
+        enum: [standard, express]
+      buyFxRate:
+        type: number
+      sellFxRate:
+        type: number
+      
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
 basePath: /Earthport/Payments-API/1.0.0
