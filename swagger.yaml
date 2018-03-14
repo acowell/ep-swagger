@@ -1,0 +1,606 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: Earthport Payments API
+  description: This API supports all services required to make cross border payments using Earthport's ACH rails.
+
+schemes:
+  - https
+# host: api.earthport.com
+# basePath: /payments/v1
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+paths:
+  /payers:
+    parameters:
+        - name: van
+          in: query
+          required: true
+          description: The payer's unique VAN (Virtual Account Number).
+          type: integer
+    get:
+      summary: Gets a Payer for the given Earthport VAN.
+      tags:
+        - Payer
+      description: Returns a single Payer for the given Earthport VAN.
+      responses:
+        200:
+          description: A Payer
+          schema:
+            $ref: '#/definitions/Payer'
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        404:
+          description: The Payer does not exists. 
+        500:
+          description: An internal error has occurred in the Earthport payment platform.   
+  /payers/{payerId}:
+    parameters:
+        - name: payerId
+          in: path
+          required: true
+          description: The payer's unique id supplied by the client. This is different to the Earthport generated unique payer Id which is called the VAN (Virtual Account Number).
+          type: string
+    get:
+      summary: Gets a Payer
+      tags:
+        - Payer
+      description: Returns a single Payer for its id
+      responses:
+        200:
+          description: A Payer
+          schema:
+            $ref: '#/definitions/Payer'
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        404:
+          description: The Payer does not exists.
+        500:
+          description: An internal error has occurred in the Earthport payment platform.   
+    post:
+      summary: Creates a Payer
+      tags:
+        - Payer
+      description: Registers a new payer for the client.
+      parameters:
+        - in: query
+          name: action
+          description: perform operations on the payer. validate, validates the payer without storing it.
+          type: string
+          enum: [validate]
+        - in: body 
+          name: payer
+          description: The payer to create.
+          schema:
+              $ref: "#/definitions/Payer"
+      responses:
+        204:
+          description: Payer succesfully created.
+        400:
+          description: Payer couldn't be created. Input Request is invalid or incorrect.
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        500:
+          description: An internal error has occurred in the Earthport payment platform.    
+    put:
+      summary: Updates a Payer
+      tags:
+        - Payer
+      description: Updates an existing payer for the client.
+      parameters:
+        - name: payer
+          in: body
+          description: The updated payer.
+          schema:
+            $ref: "#/definitions/Payer"
+      responses:
+        200:
+          description: Payer succesfully updated.
+          schema:
+            $ref: "#/definitions/Payer"
+        400:
+          description: Payer couldn't be updated. Input Request is invalid or incorrect.
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        404:
+          description: The Payer does not exists. 
+        500:
+          description: An internal error has occurred in the Earthport payment platform.  
+    delete:
+      summary: Deletes a Payer
+      tags:
+        - Payer
+      description: Deletes an existing payer for the client.
+      responses:
+        200:
+          description: Payer succesfully deleted.
+        400:
+          description: Payer couldn't be deleted. Input Request is invalid or incorrect.
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        404:
+          description: The Payer does not exists. 
+        500:
+          description: An internal error has occurred in the Earthport payment platform.  
+  /payers/{payerId}/bankAccounts:
+    parameters:
+        - name: payerId
+          in: path
+          required: true
+          description: The payer's unique id supplied by the client. This is different to the Earthport generated unique payer Id which is called the VAN (Virtual Account Number).
+          type: string
+    post:
+      summary: Creates a Beneficiary Bank Account
+      tags: 
+        - Beneficiary Bank Account
+      description: Registers a new beneficiary bank account against a Payer.
+      parameters:
+        - in: query 
+          name: action
+          description: action to be performed on the bank account
+          type: string
+          enum: [validate, validateWithExpectedSettlement, getRequiredData]
+          required: false
+        - name: bankAccount
+          in: body
+          description: The beneficiary bank account to create.
+          schema:
+              $ref: "#/definitions/BankAccount"
+      responses:
+        204:
+          description: Bank Account succesfully created.
+          schema:
+            $ref: "#/definitions/BankAccount"
+        400:
+          description: Bank Account couldn't be created. Input Request is invalid or incorrect.
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        500:
+          description: An internal error has occurred in the Earthport payment platform.
+    get:
+      summary: List all bank accounts registered by the payer.
+      tags: 
+        - Beneficiary Bank Account
+      description: Lists all bank accounts registered by a given payer. The returning list can be paginated by using offset and limit.
+      parameters: 
+        - in: query 
+          name: offset
+          description: offset
+          type: integer
+          required: false
+        - in: query 
+          name: limit
+          description: number of returned bank accounts per page
+          type: integer
+          required: false  
+      responses:
+        200:
+          description: One or more Bank Account(s) succesfully returned.
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/BankAccount"
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        404:
+          description: The Payer does not exist. 
+        500:
+          description: An internal error has occurred in the Earthport payment platform. 
+  /payers/{payerId}/bankAccounts/{bankId}:
+    parameters:
+      - name: payerId
+        in: path
+        required: true
+        description: The payer's unique id supplied by the client. This is different to the Earthport generated unique payer Id which is called the VAN (Virtual Account Number).
+        type: string
+      - name: bankId
+        in: path
+        required: true
+        description: The beneficiary bank account's id
+        type: string
+    put:
+      summary: Updates a Bank Account
+      tags:
+        - Beneficiary Bank Account
+      description: Updates an existing bank account for the client.
+      parameters:
+        - name: bank account
+          in: body
+          description: The updated bank account.
+          schema:
+            $ref: "#/definitions/BankAccount"
+      responses:
+        200:
+          description: Bank Account succesfully updated.
+          schema:
+            $ref: "#/definitions/BankAccount"
+        400:
+          description: Bank Account couldn't be updated. Input Request is invalid or incorrect.
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        404:
+          description: The Bank Account does not exists. 
+        500:
+          description: An internal error has occurred in the Earthport payment platform.  
+    delete:
+      summary: Deletes a Bank Account
+      tags:
+        - Beneficiary Bank Account
+      description: Deletes an existing bank account for the client.
+      responses:
+        200:
+          description: Bank Account succesfully updated.
+        400:
+          description: Bank Account couldn't be updated. Input Request is invalid or incorrect.
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        404:
+          description: The Bank Account does not exists. 
+        500:
+          description: An internal error has occurred in the Earthport payment platform. 
+    get:
+      summary: Gets a Bank Account
+      tags:
+        - Beneficiary Bank Account
+      description: Gets an existing bank account for the client.
+      responses:
+        200:
+          description: Bank Account succesfully returned.
+          schema:
+            $ref: "#/definitions/BankAccount"
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        404:
+          description: The Bank Account does not exists. 
+        500:
+          description: An internal error has occurred in the Earthport payment platform. 
+  /payments:
+    parameters:
+      - in: query
+        name: action
+        description: perform operations on the payment. getRequiredData, returns the fields necessary to successfully submit the payment.
+        type: string
+        enum: [getRequiredData]
+    post:
+      summary: Creates a payment.
+      tags:
+        - Payment
+      description: Creates a new payment for a previously registered payer and beneficiary bank account.
+      parameters:
+        - in: body 
+          name: payment
+          description: The payment to create.
+          schema:
+              $ref: "#/definitions/Payment"
+      responses:
+        204:
+          description: Payment succesfully created.
+        400:
+          description: Payment couldn't be created. Input Request is invalid or incorrect.
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        500:
+          description: An internal error has occurred in the Earthport payment platform. 
+  /payments/{id}: 
+    parameters:
+        - name: id
+          in: path
+          required: true
+          description: The payments unique id
+          type: string
+    get:
+      summary: Gets a payment for a given payment id
+      tags:
+        - Payment
+      description: Returns a payment for a given earthport payment id
+      responses:
+        200:
+          description: Payment succesfully returned.
+          schema:
+            $ref: "#/definitions/Payment"
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        404:
+          description: The Payment does not exists. 
+        500:
+          description: An internal error has occurred in the Earthport payment platform. 
+    delete:
+      summary: Attempts to cancel the payment
+      tags:
+        - Payment
+      description: Attempts to cancel the payment
+      responses:
+        200:
+          description: Payment was succesfully cancelled.
+        400:
+          description: The payment could not be cancelled.
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        404:
+          description: The Payment does not exists. 
+        500:
+          description: An internal error has occurred in the Earthport payment platform.
+  /balances: 
+    parameters: 
+        - name: currency
+          in: query
+          required: false
+          description: The currency of the balance to return.
+          type: string  
+    get:
+      summary: Gets either all currency balances or the balance for a given currency
+      tags:
+        - Balance
+      description: Returns all balances or balance for a given currency
+      responses:
+        200:
+          description: Balance(s) succesfully returned.
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Balance"
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        404:
+          description: The Balance for given currency does not exist. 
+        500:
+          description: An internal error has occurred in the Earthport payment platform.   
+  /quotes:
+     post:
+      summary: Creates an FX Quote.
+      tags:
+        - FX Quote
+      description: Creates a new FX Quote. This quote will have a time to live. You can use the quote's ticket id in subsequent payment requests.
+      parameters:
+        - in: body 
+          name: quote
+          description: The quote to create.
+          schema:
+              $ref: "#/definitions/Quote"
+      responses:
+        204:
+          description: Payment succesfully created.
+        400:
+          description: Payment couldn't be created. Input Request is invalid or incorrect.
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        500:
+          description: An internal error has occurred in the Earthport payment platform. 
+definitions:
+  Payer:
+    type: object
+    description: The Payer can either contain an individual or a legalEntity but not both
+    required: 
+      - id
+    properties:
+      id:
+        type: string
+        description: Unique payer Id supplied by each client.
+      van: 
+        type: integer
+        description: VAN stands for Virtual Account Number. This is an Earthport generated unique ID for this payer.
+      individual:
+        $ref: "#/definitions/Individual"
+      legalEntity:
+        $ref: "#/definitions/LegalEntity"
+  Individual:
+    type: object
+    required:
+      - givenNames
+      - familyName
+    properties:
+      givenNames:
+        type: string
+      familyName:
+        type: string
+      address:
+        $ref: "#/definitions/Address"
+      birthInformation: 
+        $ref: "#/definitions/BirthInformation"  
+      identifications:
+        type: array
+        items:
+          $ref: "#/definitions/Identification"  
+    example:
+      givenNames: John David
+      familyName: Doe
+      address:
+        addressLine1: 1 Main Street
+        city: London
+        country: GB
+  LegalEntity:
+    type: object
+    properties: 
+      name:
+        type: string
+      address:
+        $ref: "#/definitions/Address" 
+      registration:
+        $ref: "#/definitions/Registration" 
+    example:
+      name: Acme Ltd
+      registration: 
+        number: 123456789
+        country: GB
+        province: London
+  Address:
+    type: object
+    required:
+      - addressLine1
+      - city
+      - country
+    properties:
+      addressLine1:
+        type: string
+        minLength: 1
+        maxLength: 254
+      addressLine2:
+        type: string
+        maxLength: 254
+      addressLine3:
+        type: string
+        maxLength: 254
+      city: 
+        type: string
+        minLength: 1
+        maxLength: 254
+      province:
+        type: string
+        maxLength: 254
+      country:
+        type: string
+        minLength: 2
+        maxLength: 2
+        description: address country. 2 letter country code in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code standard.
+        example: United Kingdon of Great Britain is 'GB', Switzerland is 'CH'
+      postCode:
+        type: string
+        maxLength: 10
+  BirthInformation:
+    type: object
+    required:
+      - country
+      - dob
+    properties:
+      city:
+        type: string
+        description: city or town of birth
+        maxLength: 254
+      country:
+        type: string
+        description: country of birth. 2 letter country code in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code standard.
+        example: United Kingdon of Great Britain is 'GB', Switzerland is 'CH'
+      dob:
+        type: string
+        description: The date of birth formatted as a string in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. i.e. YYYY-MM-DD 
+        example: 1980-01-20 ("20th January 1980")
+  Identification:
+    type: object
+    required:
+      - type
+      - number
+      - country
+    properties:
+      type:
+        type: string
+        enum: [Passport, Driving License, National ID Card, Labour Card]
+        description: type of identification document.
+        example: Driving License
+      number:
+        type: string
+        description: identification number
+      country:
+        type: string
+        description: country of identification. 2 letter country code in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code standard.
+        example: United Kingdon of Great Britain is 'GB', Switzerland is 'CH'
+      validFrom:
+        type: string
+        description: A date formatted as a string in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. i.e. YYYY-MM-DD 
+        example: 1980-01-20
+      validTo:
+        type: string
+        description: A date formatted as a string in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. i.e. YYYY-MM-DD. This needs to be after validFrom.
+        example: 1990-02-01
+  Registration:
+     type: object
+     required:
+      - number
+      - country
+     properties:
+      number:
+        type: string
+      country:
+        type: string
+        description: registration country. 2 letter country code in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code standard.
+        example: United Kingdon of Great Britain is 'GB', Switzerland is 'CH'
+      province:
+        type: string
+  BankAccountField:
+    type: object
+    required:
+      - key
+      - value
+    description: Key-Value pair for each bank account field to register a local bank account.
+    properties:
+      key:
+        type: string
+        enum: [accountNumber, sortCode, accountName, bankName, bic, iban, bankCode, branchCode]
+      value:
+        type: string
+  BankAccount:
+    type: object
+    required:
+      - id
+      - currency
+      - country
+      - bankAccountDetails
+    description: blah blah...
+    properties:
+      id:
+        type: string
+        description: Unique Bank Account Id supplied by each client.
+      payerId:
+        type: string
+        description: Unique Payer Id supplied by each client
+      van: 
+        type: integer
+        description: Virtual Account Number, which is the Earthport generated unique ID for this payer. This is optional and is only needed if not supplying the payerId.
+      individual:
+        $ref: "#/definitions/Individual"
+      legalEntity:
+        $ref: "#/definitions/LegalEntity"
+      currency:
+        type: string
+        description: sds
+      country:
+        type: string
+        description: sd
+      bankAccountDetails:
+        type: array
+        items:
+          $ref: "#/definitions/BankAccountField"
+  Payment:
+    type: object
+    required:
+      - currency
+      - amount
+      - reference
+    properties:
+      payerId:
+        type: string
+        description: bbb
+      beneficiaryBankId:
+        type: string
+        description: bbb
+      currency: 
+        type: string
+        description: bbb
+      amount:
+        type: string
+        description: bbb
+      reference:
+        type: string
+        description: bbb
+  Balance:
+    type: object
+    properties:
+      amount:
+        type: string
+        description: balance amount
+      currency:
+        type: string
+        description: currency of the balance
+      lastMovementTimeStamp:
+        type: integer
+        description: ggg
+      timeStamp:
+        type: integer
+        description: hhh
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /Earthport/Payments-API/1.0.0
