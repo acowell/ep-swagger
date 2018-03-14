@@ -798,12 +798,11 @@ definitions:
       fxTicketId:
         type: "integer"
     example:
-      application/json:
-        sellAmount:
-          currency: "EUR"
-        buyAmount:
-          currency: "GBP"
-          amount: "200.00"
+      sellAmount:
+        currency: "EUR"
+      buyAmount:
+        currency: "GBP"
+        amount: "200.00"
   Amount:
     type: "object"
     properties:
