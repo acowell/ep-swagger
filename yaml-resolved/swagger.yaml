@@ -455,6 +455,19 @@ paths:
       responses:
         204:
           description: "Quote succesfully created."
+          examples:
+            application/json:
+              fxTicketId: 68633
+              fxRate:
+                sellCurrency: "EUR"
+                buyCurrency: "GBP"
+                rate: 0.818579
+              sellAmount:
+                currency: "EUR"
+                amount: "244.33"
+              buyAmount:
+                currency: "GBP"
+                amount: "200.00"
         400:
           description: "Quote couldn't be created. Input Request is invalid or incorrect."
         401:
