@@ -414,8 +414,9 @@ paths:
         - in: body 
           name: bulkQuotes
           description: The quote to create.
-          type: array
-          items:
+          schema:
+            type: array
+            items:
               $ref: "#/definitions/BulkQuoteRequest"
       responses:
         204:
