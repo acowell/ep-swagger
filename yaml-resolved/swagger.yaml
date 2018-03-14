@@ -797,6 +797,11 @@ definitions:
         $ref: "#/definitions/FXRate"
       fxTicketId:
         type: "integer"
+      serviceLevel:
+        type: "string"
+        enum:
+        - "standard"
+        - "express"
     example:
       sellCurrency: "EUR"
       buyAmount:
