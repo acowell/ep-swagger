@@ -381,19 +381,19 @@ paths:
       parameters:
         - in: query
           name: buyCurrency
-          description:
+          description: s
           type: string
         - in: query
           name: sellCurrency
-          description:
-          type: string          
+          description: s
+          type: string
         - in: query
           name: buyAmount
-          description:
-          type: string  
+          description: s
+          type: string
         - in: query
           name: sellAmount
-          description:
+          description: s
           type: string
       responses:
         200:
