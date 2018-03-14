@@ -619,11 +619,10 @@ definitions:
       fxTicketId:
         type: integer
     example:
-        sellAmount:
-          currency: EUR
+        sellCurrency: EUR
         buyAmount:
-            currency: GBP
-            amount: "200.00"
+          currency: GBP
+          amount: "200.00"
   Amount:
     type: object
     properties:
