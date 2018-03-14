@@ -527,19 +527,8 @@ paths:
       responses:
         204:
           description: "Bulk Quote succesfully created."
-          examples:
-            application/json:
-              fxTicketId: 68633
-              fxRate:
-                sellCurrency: "EUR"
-                buyCurrency: "GBP"
-                rate: 0.818579
-              sellAmount:
-                currency: "EUR"
-                amount: "244.33"
-              buyAmount:
-                currency: "GBP"
-                amount: "200.00"
+          schema:
+            $ref: "#/definitions/BulkQuoteResponse"
         400:
           description: "Bulk Quote couldn't be created. Input Request is invalid or\
             \ incorrect."
@@ -921,6 +910,22 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/BulkFXDetail"
+    example:
+      fxTicketID: 0
+      expiryTimestamp: 6
+      bulkFXDetails:
+      - buyCountry: "buyCountry"
+        sellFxRate: 5.962133916683182377482808078639209270477294921875
+        sellCurrency: "sellCurrency"
+        buyFxRate: 1.46581298050294517310021547018550336360931396484375
+        buyCurrency: "buyCurrency"
+        serviceLevel: "standard"
+      - buyCountry: "buyCountry"
+        sellFxRate: 5.962133916683182377482808078639209270477294921875
+        sellCurrency: "sellCurrency"
+        buyFxRate: 1.46581298050294517310021547018550336360931396484375
+        buyCurrency: "buyCurrency"
+        serviceLevel: "standard"
   BulkFXDetail:
     type: "object"
     properties:
@@ -939,3 +944,10 @@ definitions:
         type: "number"
       sellFxRate:
         type: "number"
+    example:
+      buyCountry: "buyCountry"
+      sellFxRate: 5.962133916683182377482808078639209270477294921875
+      sellCurrency: "sellCurrency"
+      buyFxRate: 1.46581298050294517310021547018550336360931396484375
+      buyCurrency: "buyCurrency"
+      serviceLevel: "standard"
