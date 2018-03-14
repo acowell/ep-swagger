@@ -440,18 +440,22 @@ paths:
       parameters:
       - name: "buyCurrency"
         in: "query"
+        description: "s"
         required: false
         type: "string"
       - name: "sellCurrency"
         in: "query"
+        description: "s"
         required: false
         type: "string"
       - name: "buyAmount"
         in: "query"
+        description: "s"
         required: false
         type: "string"
       - name: "sellAmount"
         in: "query"
+        description: "s"
         required: false
         type: "string"
       responses:
