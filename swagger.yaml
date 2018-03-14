@@ -394,7 +394,7 @@ paths:
         - in: query
           name: sellAmount
           description:
-          type: string  
+          type: string
       responses:
         200:
           description: Quote succesfully returned.
