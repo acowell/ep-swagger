@@ -361,7 +361,7 @@ paths:
           name: quote
           description: The quote to create.
           schema:
-              $ref: "#/definitions/Quote"
+            $ref: "#/definitions/Quote"
       responses:
         204:
           description: Quote succesfully created.
