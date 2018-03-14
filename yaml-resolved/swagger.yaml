@@ -520,6 +520,10 @@ paths:
         name: "bulkQuotes"
         description: "The quote to create."
         required: false
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/BulkQuoteRequest"
       responses:
         204:
           description: "Bulk Quote succesfully created."
