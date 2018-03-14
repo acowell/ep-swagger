@@ -355,18 +355,7 @@ paths:
       summary: Creates an FX Quote.
       tags:
         - FX Quote
-      description: Creates a new FX Quote between the required sell currency and buy currency. 
-      This quote will have a time to live. You can use the quote's unique ticket id in subsequent payment requests.
-      
-      There are two exclusive scenarios when requesting a rate between two two currencies:-
-      1. The caller provides a sell amount and is given the corresponding
-      buy amount. In this case, the caller needs to populate the sellAmount
-      and buyCurrency input parameters.
-      
-      2. The caller provides a buy amount and is given the corresponding
-      sell amount. In this case, the caller needs to populate the buyAmount
-      and sellCurrency input parameters.
-        
+      description: Creates a new FX Quote between the required sell currency and buy currency. <br/>This quote will have a time to live. You can use the quote's unique ticket id in subsequent payment requests.<br/><br/>There are two exclusive scenarios when requesting a rate between two two currencies:- <br/>1. The caller provides a sell amount and is given the corresponding buy amount. In this case, the caller needs to populate the sellAmount and buyCurrency input parameters. <br/><br/>2. The caller provides a buy amount and is given the corresponding sell amount. In this case, the caller needs to populate the  buyAmount and sellCurrency input parameters.
       parameters:
         - in: body 
           name: quote
