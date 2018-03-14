@@ -798,19 +798,12 @@ definitions:
       fxTicketId:
         type: "integer"
     example:
-      fxRate:
-        rate: 0.80082819046101150206595775671303272247314453125
-        sellCurrency: "sellCurrency"
-        buyCurrency: "buyCurrency"
-      fxTicketId: 6
-      buyAmount:
-        amount: "amount"
-        currency: "currency"
-      sellAmount:
-        amount: "amount"
-        currency: "currency"
-      sellCurrency: "sellCurrency"
-      buyCurrency: "buyCurrency"
+      application/json:
+        sellAmount:
+          currency: "EUR"
+        buyAmount:
+          currency: "GBP"
+          amount: "200.00"
   Amount:
     type: "object"
     properties:
@@ -818,9 +811,6 @@ definitions:
         type: "string"
       amount:
         type: "string"
-    example:
-      amount: "amount"
-      currency: "currency"
   FXRate:
     type: "object"
     properties:
@@ -830,7 +820,3 @@ definitions:
         type: "string"
       rate:
         type: "number"
-    example:
-      rate: 0.80082819046101150206595775671303272247314453125
-      sellCurrency: "sellCurrency"
-      buyCurrency: "buyCurrency"
