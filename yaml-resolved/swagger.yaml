@@ -581,7 +581,8 @@ paths:
         type: "integer"
       - name: "sortOrder"
         in: "query"
-        description: "b"
+        description: "Sort transactions by creation timestamp in ascending or descending\
+          \ order."
         required: false
         type: "string"
         enum:
@@ -589,10 +590,14 @@ paths:
         - "desc"
       - name: "offset"
         in: "query"
+        description: "Used for pagination of results. offset represents the starting\
+          \ position."
         required: false
         type: "integer"
       - name: "limit"
         in: "query"
+        description: "Used for pagination of results. limit represents the number\
+          \ of transactions per page."
         required: false
         type: "integer"
       responses:
