@@ -439,6 +439,8 @@ paths:
       responses:
         200:
           description: Transaction Details succesfully returned.
+          schema:
+            $ref: '#/definitions/TransactionDetails'
         400:
           description: Transaction Details couldn't be returned. Input Request is invalid or incorrect.
         401:
@@ -754,6 +756,24 @@ definitions:
         type: number
       sellFxRate:
         type: number
+  TransactionId:
+    type: object
+    properties:
+      epTransactionId:
+        type: integer
+      merchantTransactionId:
+        type: string
+  TransactionDetails:
+    type: object
+    properties:
+      transactionId:
+        type: 
+          $ref: '#/definitions/TransactionId'
+      details: 
+        type: object
+        description: Need to look into polymorphism - this structure will be different per financial txn type
+        
+    
       
 # Added by API Auto Mocking Plugin
 host: virtserver.swaggerhub.com
