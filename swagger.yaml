@@ -456,8 +456,27 @@ paths:
       parameters:
         - in: query 
           name: currency
-          description: The quote to create.
+          description: The currency of the statement
           type: string
+        - in: query
+          name: startTime
+          description: b
+          type: integer
+        - in: query
+          name: endTime
+          description: b
+          type: integer
+        - in: query
+          name: sortOrder
+          description: b
+          type: string
+          enum: [asc,desc]
+        - in: query
+          name: offset
+          type: integer
+        - in: query
+          name: limit
+          type: integer
       responses:
         200:
           description: Statement succesfully returned.
