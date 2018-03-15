@@ -546,6 +546,8 @@ paths:
       responses:
         200:
           description: "Transaction Details succesfully returned."
+          schema:
+            $ref: "#/definitions/TransactionDetails"
         400:
           description: "Transaction Details couldn't be returned. Input Request is\
             \ invalid or incorrect."
@@ -968,3 +970,20 @@ definitions:
       buyFxRate: 1.46581298050294517310021547018550336360931396484375
       buyCurrency: "buyCurrency"
       serviceLevel: "standard"
+  TransactionId:
+    type: "object"
+    properties:
+      epTransactionId:
+        type: "integer"
+      merchantTransactionId:
+        type: "string"
+  TransactionDetails:
+    type: "object"
+    properties:
+      details:
+        type: "object"
+        description: "Need to look into polymorphism - this structure will be different\
+          \ per financial txn type"
+        properties: {}
+    example:
+      details: "{}"
