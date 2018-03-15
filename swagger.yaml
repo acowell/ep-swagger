@@ -787,7 +787,9 @@ definitions:
       details: 
         type: object
         description: Need to look into polymorphism - this structure will be different per financial txn type
-        
+  Statement:
+    type: object
+    
     
       
 # Added by API Auto Mocking Plugin
