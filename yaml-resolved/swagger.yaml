@@ -977,9 +977,14 @@ definitions:
         type: "integer"
       merchantTransactionId:
         type: "string"
+    example:
+      epTransactionId: 0
+      merchantTransactionId: "merchantTransactionId"
   TransactionDetails:
     type: "object"
     properties:
+      transactionId:
+        $ref: "#/definitions/TransactionId"
       details:
         type: "object"
         description: "Need to look into polymorphism - this structure will be different\
@@ -987,3 +992,6 @@ definitions:
         properties: {}
     example:
       details: "{}"
+      transactionId:
+        epTransactionId: 0
+        merchantTransactionId: "merchantTransactionId"
