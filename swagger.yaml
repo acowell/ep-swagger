@@ -462,13 +462,13 @@ paths:
           name: startTime
           schema:
             type: integer
-            example: 1521125797
+          example: 1521125797
           description: Timestamp for start of statement. Is number of milliseconds since EPOCH  
         - in: query
           name: endTime
           schema:
             type: integer
-            example: 1521125797
+          example: 1521125797
           description: Timestamp for end of statement. Is number of milliseconds since EPOCH  
         - in: query
           name: sortOrder
