@@ -756,19 +756,18 @@ definitions:
         type: number
       sellFxRate:
         type: number
-  TransactionId:
+  TransactionId: 
     type: object
     properties:
-      epTransactionId:
+      epTransactionId: 
         type: integer
-      merchantTransactionId:
+      merchantTransactionId: 
         type: string
-  TransactionDetails:
+  TransactionDetails: 
     type: object
-    properties:
-      transactionId:
-        type: 
-          $ref: '#/definitions/TransactionId'
+    properties: 
+      transactionId: 
+        $ref: '#/definitions/TransactionId'
       details: 
         type: object
         description: Need to look into polymorphism - this structure will be different per financial txn type
