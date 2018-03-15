@@ -561,7 +561,12 @@ paths:
       - "Statement"
       summary: "Get statement of transactions"
       description: "Get a Statement."
-      parameters: []
+      parameters:
+      - name: "currency"
+        in: "query"
+        description: "The quote to create."
+        required: false
+        type: "string"
       responses:
         200:
           description: "Statement succesfully returned."
