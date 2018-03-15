@@ -453,6 +453,11 @@ paths:
       tags:
         - Statement
       description: Get a Statement.
+      parameters:
+        - in: query 
+          name: currency
+          description: The quote to create.
+          type: string
       responses:
         200:
           description: Statement succesfully returned.
