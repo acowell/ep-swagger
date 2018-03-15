@@ -447,7 +447,23 @@ paths:
           description: Unauthorised - Invalid API Key and Token.
         500:
           description: An internal error has occurred in the Earthport payment platform.
-    
+  /statements:
+    get:
+      summary: Get statement of transactions
+      tags:
+        - Statement
+      description: Get a Statement.
+      responses:
+        200:
+          description: Statement succesfully returned.
+          schema:
+            $ref: '#/definitions/Statement'
+        400:
+          description: Statement Details couldn't be returned. Input Request is invalid or incorrect.
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        500:
+          description: An internal error has occurred in the Earthport payment platform.
 definitions:
   Payer:
     type: object
