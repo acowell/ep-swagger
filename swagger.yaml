@@ -460,16 +460,12 @@ paths:
           type: string
         - in: query
           name: startTime
-          schema:
-            type: integer
-          example: 1521125797
-          description: Timestamp for start of statement. Is number of milliseconds since EPOCH  
+          type: integer
+          description: Timestamp for start of statement. Is number of milliseconds since EPOCH. e.g. 1521125797 for 'Thursday, 15 March 2018 14:56:37 UTC'  
         - in: query
           name: endTime
-          schema:
-            type: integer
-          example: 1521125797
-          description: Timestamp for end of statement. Is number of milliseconds since EPOCH  
+          type: integer
+          description: Timestamp for end of statement. Is number of milliseconds since EPOCH. e.g. 1521125797 for 'Thursday, 15 March 2018 14:56:37 UTC'    
         - in: query
           name: sortOrder
           description: b
