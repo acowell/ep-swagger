@@ -460,11 +460,13 @@ paths:
           type: string
         - in: query
           name: startTime
-          description: b
+          example: 1521125797 for 'Thu, 15 Mar 2018 14:56:37 UTC'
+          description: Timestamp for start of statement. Is number of milliseconds since EPOCH
           type: integer
         - in: query
           name: endTime
-          description: b
+          example: 1521125797 for 'Thu, 15 Mar 2018 14:56:37 UTC'
+          description: Timestamp for end of statement. Is number of milliseconds since EPOCH
           type: integer
         - in: query
           name: sortOrder
