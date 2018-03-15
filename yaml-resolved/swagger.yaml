@@ -570,13 +570,15 @@ paths:
       - name: "startTime"
         in: "query"
         description: "Timestamp for start of statement. Is number of milliseconds\
-          \ since EPOCH"
+          \ since EPOCH. e.g. 1521125797 for 'Thursday, 15 March 2018 14:56:37 UTC'"
         required: false
+        type: "integer"
       - name: "endTime"
         in: "query"
         description: "Timestamp for end of statement. Is number of milliseconds since\
-          \ EPOCH"
+          \ EPOCH. e.g. 1521125797 for 'Thursday, 15 March 2018 14:56:37 UTC'"
         required: false
+        type: "integer"
       - name: "sortOrder"
         in: "query"
         description: "b"
