@@ -1014,3 +1014,5 @@ definitions:
       transactionId:
         epTransactionId: 0
         merchantTransactionId: "merchantTransactionId"
+  Statement:
+    type: "object"
