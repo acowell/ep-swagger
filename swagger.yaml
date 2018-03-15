@@ -474,7 +474,6 @@ paths:
           type: string
           enum: [asc,desc]
           required: true
-          default: asc
         - in: query
           name: offset
           type: integer
