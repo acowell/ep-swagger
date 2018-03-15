@@ -572,13 +572,11 @@ paths:
         description: "Timestamp for start of statement. Is number of milliseconds\
           \ since EPOCH"
         required: false
-        type: "integer"
       - name: "endTime"
         in: "query"
         description: "Timestamp for end of statement. Is number of milliseconds since\
           \ EPOCH"
         required: false
-        type: "integer"
       - name: "sortOrder"
         in: "query"
         description: "b"
