@@ -458,10 +458,12 @@ paths:
           name: currency
           description: The currency of the statement
           type: string
+          required: true
         - in: query
           name: startTime
           type: integer
           description: Timestamp for start of statement. Is number of milliseconds since EPOCH. e.g. 1521125797 for 'Thursday, 15 March 2018 14:56:37 UTC'  
+          required: true
         - in: query
           name: endTime
           type: integer
@@ -471,6 +473,8 @@ paths:
           description: Sort transactions by creation timestamp in ascending or descending order.
           type: string
           enum: [asc,desc]
+          required: true
+          default: asc
         - in: query
           name: offset
           type: integer
