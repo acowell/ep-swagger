@@ -468,15 +468,17 @@ paths:
           description: Timestamp for end of statement. Is number of milliseconds since EPOCH. e.g. 1521125797 for 'Thursday, 15 March 2018 14:56:37 UTC'    
         - in: query
           name: sortOrder
-          description: b
+          description: Sort transactions by creation timestamp in ascending or descending order.
           type: string
           enum: [asc,desc]
         - in: query
           name: offset
           type: integer
+          description: Used for pagination of results. offset represents the starting position.
         - in: query
           name: limit
           type: integer
+          description: Used for pagination of results. limit represents the number of transactions per page.
       responses:
         200:
           description: Statement succesfully returned.
