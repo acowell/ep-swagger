@@ -430,6 +430,22 @@ paths:
           description: Unauthorised - Invalid API Key and Token.
         500:
           description: An internal error has occurred in the Earthport payment platform.
+  /transactions:        
+    get:
+      summary: Gets transaction details.
+      tags:
+        - Transaction
+      description: Get Transaction Details.
+      responses:
+        200:
+          description: Transaction Details succesfully returned.
+        400:
+          description: Transaction Details couldn't be returned. Input Request is invalid or incorrect.
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        500:
+          description: An internal error has occurred in the Earthport payment platform.
+    
 definitions:
   Payer:
     type: object
