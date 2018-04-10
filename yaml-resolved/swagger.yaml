@@ -311,7 +311,7 @@ paths:
       tags:
       - Payment
       summary: Creates a payment
-      description: Creates a new payment for a previously registered payer and beneficiary bank account.
+      description: Creates a new payment for a previously registered beneficiary bank account (and payer).
       parameters:
       - name: bankId
         in: path
