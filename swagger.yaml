@@ -270,7 +270,7 @@ paths:
       summary: Creates a payment
       tags:
         - Payment
-      description: Creates a new payment for a previously registered payer and beneficiary bank account.
+      description: Creates a new payment for a previously registered beneficiary bank account (and payer).
       parameters:
         - in: body 
           name: payment
