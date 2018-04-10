@@ -267,7 +267,7 @@ paths:
         description: The beneficiary bank account's id
         type: string
     post:
-      summary: Creates a payment
+      summary: Creates a payment to a previously registered beneficiary bank account.
       tags:
         - Payment
       description: Creates a new payment for a previously registered beneficiary bank account (and payer).
