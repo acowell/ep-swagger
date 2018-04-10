@@ -337,7 +337,7 @@ paths:
     post:
       tags:
       - Payment
-      summary: Creates a payment (CUP).
+      summary: Creates a payment without the need to previously register the beneficiary bank account.
       description: Creates a new payment for a previously registered payer and beneficiary bank account.
       parameters:
       - name: action
