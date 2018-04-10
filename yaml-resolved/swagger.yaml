@@ -310,7 +310,7 @@ paths:
     post:
       tags:
       - Payment
-      summary: Creates a payment
+      summary: Creates a payment to a previously registered beneficiary bank account.
       description: Creates a new payment for a previously registered beneficiary bank account (and payer).
       parameters:
       - name: bankId
