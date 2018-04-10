@@ -259,6 +259,33 @@ paths:
           description: The Bank Account does not exists. 
         500:
           description: An internal error has occurred in the Earthport payment platform. 
+  /bankAccounts/{bankId}/payments:
+    parameters:
+      - name: bankId
+        in: path
+        required: true
+        description: The beneficiary bank account's id
+        type: string
+    post:
+      summary: Creates a payment
+      tags:
+        - Payment
+      description: Creates a new payment for a previously registered payer and beneficiary bank account.
+      parameters:
+        - in: body 
+          name: payment
+          description: The payment to create.
+          schema:
+              $ref: "#/definitions/Payment"
+      responses:
+        204:
+          description: Payment succesfully created.
+        400:
+          description: Payment couldn't be created. Input Request is invalid or incorrect.
+        401:
+          description: Unauthorised - Invalid API Key and Token.
+        500:
+          description: An internal error has occurred in the Earthport payment platform. 
   /payments:
     parameters:
       - in: query
@@ -267,7 +294,7 @@ paths:
         type: string
         enum: [getRequiredData]
     post:
-      summary: Creates a payment.
+      summary: Creates a payment (CUP).
       tags:
         - Payment
       description: Creates a new payment for a previously registered payer and beneficiary bank account.
